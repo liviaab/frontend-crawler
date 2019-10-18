@@ -1,0 +1,15 @@
+@import '../../../assets/stylesheets/colors.scss';
+
+.searchPage {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	width: 100%;
+	background-color: $color-ivory;
+
+
+	> .header {
+		width: 50%;
+		margin: 30px auto;
+	}
+}
