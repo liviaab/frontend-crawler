@@ -1,0 +1,16 @@
+@import '../../../assets/stylesheets/colors.scss';
+
+.detailsWrapper {
+  color: $color-medium-gray;
+  font-size: 14px;
+
+  .title {
+    font-size: 18px;
+    color: $color-dark-gray;
+    margin-bottom: 15px;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+}
