@@ -5,11 +5,39 @@
 	flex-flow: column;
 	align-items: center;
 	width: 100%;
-	background-color: $color-ivory;
-
 
 	> .header {
-		width: 50%;
-		margin: 30px auto;
+		width: 100%;
+		background-color: $color-ivory;
+		display: flex;
+		flex-flow: row;
+		justify-content: center;
+
+		> .content {
+			margin: 30px auto;
+			width: 50%;
+		}
+	}
+
+	> .resultsWrapper {
+		width: 70%;
+		margin: 0 auto;
+		padding: 30px 0;
+
+		> .results {
+			margin-top: 20px;
+			display: flex;
+			flex-flow: row;
+			justify-content: space-between;
+
+			> .changes {
+				width: 70%;
+			}
+
+			> .infos {
+				width: 25%;
+
+			}
+		}
 	}
 }
