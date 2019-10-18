@@ -17,10 +17,10 @@ Title.propTypes = {
 	title: PropTypes.string.isRequired,
 	subtitle: PropTypes.string,
 	style: PropTypes.shape({
-    wrapper: PropTypes.string,
-    title: PropTypes.string,
-    subtitle: PropTypes.string
-  })
+		wrapper: PropTypes.string,
+		title: PropTypes.string,
+		subtitle: PropTypes.string
+	})
 }
 
 Title.deafultProps = {
