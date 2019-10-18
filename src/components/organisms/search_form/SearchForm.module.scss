@@ -1,0 +1,24 @@
+@import '../../../assets/stylesheets/colors.scss';
+
+.searchForm {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin: 0;
+
+	> .processField {
+		width:100%;
+	}
+
+	> .processField {
+		margin-left: 20px;
+	}
+
+	> .submit {
+		font-weight: bold;
+		font-size: 14px;
+		color: $color-dark-gray;
+	}
+}

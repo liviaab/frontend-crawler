@@ -1,9 +1,0 @@
-build/*
-node_modules/*
-.nyc_output/*
-scripts/*
-scripts/*
-config/*
-dist/
-local_runner.js
-serviceWorker.js
