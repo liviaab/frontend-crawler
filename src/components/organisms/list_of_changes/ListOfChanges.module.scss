@@ -1,0 +1,13 @@
+.changesTable {
+  width: 100%;
+
+  .change {
+    font-size: 28px;
+    display: flex;
+    flex-flow:  column nowrap;
+
+    .description span {
+      white-space: normal;
+    }
+  }
+}
