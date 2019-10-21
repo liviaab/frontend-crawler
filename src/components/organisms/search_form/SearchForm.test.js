@@ -50,7 +50,7 @@ describe('SearchForm organism', () => {
       process_number: ''
     }
     const expectedFinalState = {
-      courts: courtsResponse.map(item => ({'id': item.id, 'label': item.initials})),
+      courts: courtsResponse.map((item) => ({ id: item.id, label: item.initials })),
       court_name: '',
       process_number: processNumber
     }
@@ -77,7 +77,7 @@ describe('SearchForm organism', () => {
   it('does not call `updateParent` function  if the process number is invalid', (done) => {
     initCourtNock()
     nock(process.env.REACT_APP_BASE_URL)
-      .get(`/processes/undefined`)
+      .get('/processes/undefined')
       .reply(500, 'Internal Server Error', { 'Content-Type': 'application/json' })
 
     searchFormWrapper = shallow(<SearchForm updateParent={mockFunction} />)
@@ -89,7 +89,7 @@ describe('SearchForm organism', () => {
 
   it('updates state if court is selected', () => {
     initCourtNock()
-    const event = {id: 1, label: 'TJAL'}
+    const event = { id: 1, label: 'TJAL' }
 
     searchFormWrapper = shallow(<SearchForm updateParent={mockFunction} />)
     const combobox = searchFormWrapper.find('Combobox')
@@ -100,10 +100,10 @@ describe('SearchForm organism', () => {
   it('updates state if process number is selected', () => {
     initCourtNock()
     const event = {
-        target: {
-          value: processNumber
-        }
+      target: {
+        value: processNumber
       }
+    }
 
     searchFormWrapper = shallow(<SearchForm updateParent={mockFunction} />)
     const input = searchFormWrapper.find('#input-process-number')

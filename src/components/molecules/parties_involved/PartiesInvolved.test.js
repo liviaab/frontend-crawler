@@ -13,10 +13,10 @@ describe('PartiesInvolved molecule', () => {
   })
 
   it('renders the list content', () => {
-    const { parties_involved } = processFixture
-    const expectedLength = parties_involved.length + 1
+    const members = processFixture.parties_involved
+    const expectedLength = members.length + 1
 
-    partiesInvolvedWrapper = shallow(<PartiesInvolved members={parties_involved} />)
+    partiesInvolvedWrapper = shallow(<PartiesInvolved members={members} />)
     expect(partiesInvolvedWrapper.children()).toHaveLength(expectedLength)
   })
 })
