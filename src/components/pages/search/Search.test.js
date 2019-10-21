@@ -15,15 +15,16 @@ describe('Search page', () => {
   })
 
   it('shows process results and info after search a valid process', () => {
-    const expectedState = {
-      ...processFixture,
-      court_name: ''
-    }
-    searchWrapper = shallow(<Search />)
+    const expectedProcess =  {
+        ...processFixture,
+        court_name: ''
+      }
 
-    searchWrapper.instance().updateProcess(processFixture)
+    searchWrapper = shallow(<Search />)
+    searchWrapper.instance().updateProcess({process: expectedProcess, showResults: true})
+
     expect(searchWrapper.find('#search-results').hasClass('resultsWrapper')).toBeTruthy()
     expect(searchWrapper.state().showResults).toBeTruthy()
-    expect(searchWrapper.state().process).toEqual(expectedState)
+    expect(searchWrapper.state().process).toEqual(expectedProcess)
   })
 })

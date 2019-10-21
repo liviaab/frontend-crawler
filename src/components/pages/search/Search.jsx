@@ -20,13 +20,7 @@ class Search extends Component {
 	}
 
 	updateProcess = (data) => {
-		this.setState({
-			process: {
-				...this.state.process,
-				...data
-			},
-			showResults: true
-		})
+		this.setState({...data})
 	}
 
 	getResultsStyle = () => (this.state.showResults ? style.resultsWrapper : style.hideResults)
