@@ -59,20 +59,20 @@ class SearchForm extends Component {
 	}
 
 	handleButton = (event) => {
-		const { processNumber, courtName, errors } = this.state
+		const { processNumber, courtName } = this.state
 
 		if(this.canDoSearch()) {
 			processesService().get(processNumber.value).then(response => {
 				let showResults = true
 
-				if (response.status == 404) {
+				if (response.status === 404) {
 					toaster.info('Processo não encontrado', 500)
 					showResults = false
 				}
 
 				this.props.updateParent({
 					process: { ...response.data, court_name: courtName.value },
-					showResults: true
+					showResults: showResults
 				})
 			}).catch(error => {
 				console.log(error);
