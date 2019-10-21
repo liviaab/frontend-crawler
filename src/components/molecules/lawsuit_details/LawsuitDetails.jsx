@@ -20,7 +20,7 @@ const htmlDetail = (key, value) =>  (
 const buildDetails = ({ process }) => {
   const entries = Object.entries(process)
 
-  if(entries != []) {
+  if(entries !== []) {
     return entries
             .filter(item => dict.hasOwnProperty(item[DATA_INDEX]))
             .map(item => htmlDetail(item[DATA_INDEX], item[VALUE_INDEX]))

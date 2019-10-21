@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import style from './ListOfChanges.module.scss'
 
 const buildBody = (changes) => {
-  if(changes == []) {
+  if(changes === []) {
     return <Fragment />
   }
 
