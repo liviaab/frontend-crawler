@@ -60,23 +60,25 @@ class SearchForm extends Component {
 		return fields
 	}
 
+	showValidationMessage = () => {
+		const fields = this.errorMessageFields()
+		const errorMessage = unformattedErrorMessage.replace('{}', fields)
+
+		toaster.warning(errorMessage, 400)
+	}
+
 	handleButton = async (event) => {
 		const { processNumber, courtName } = this.state
-		let showResults = true
-		let response
+		let response = undefined
 
 		if(!this.canDoSearch()) {
-			const fields = this.errorMessageFields()
-			const errorMessage = unformattedErrorMessage.replace('{}', fields)
-
-			toaster.warning(errorMessage, 400)
+			this.showValidationMessage()
 			return
 		}
 
 		try {
 			response = await processesService().get(processNumber.value)
 		} catch (error) {
-			showResults = false
 			if (error.response.status === 404) {
 				toaster.danger('Processo não encontrado', 500)
 			} else {
@@ -85,22 +87,7 @@ class SearchForm extends Component {
 				, 500)
 			}
 		} finally {
-			if(response === undefined){
-				response = {
-					data: {
-							process_number: '',
-							court_name: '',
-							distribution_date: '',
-							parties_involved: [],
-							movimentations: []
-					}
-				}
-			}
-
-			this.props.updateParent({
-				process: { ...response.data, court_name: '' },
-				showResults: showResults
-			})
+			this.props.onSearchResult(response)
 		}
 	}
 
@@ -148,7 +135,7 @@ class SearchForm extends Component {
 }
 
 SearchForm.propTypes = {
-	updateParent: PropTypes.func.isRequired
+	onSearchResult: PropTypes.func.isRequired
 }
 
 export default SearchForm
