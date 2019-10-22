@@ -75,8 +75,8 @@ class SearchForm extends Component {
 					showResults: showResults
 				})
 			}).catch(error => {
-				console.log(error);
-				toaster.danger('Algo de errado aconteceu durante a busca do processo.', 500)
+				toaster.danger('Algo de errado aconteceu durante a busca \
+												e não foi possível recuperar o processo.', 500)
 			})
 		}
 		else {

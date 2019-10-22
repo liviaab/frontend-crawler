@@ -37,7 +37,7 @@ $ yarn start
 ```
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-
+<!--
 ### To Do
 #### Deployment
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
@@ -47,3 +47,4 @@ Useful links:
 https://facebook.github.io/create-react-app/docs/deployment
 
 https://devcenter.heroku.com/articles/github-integration
+-->

@@ -15,13 +15,13 @@ describe('Search page', () => {
   })
 
   it('shows process results and info after search a valid process', () => {
-    const expectedProcess =  {
-        ...processFixture,
-        court_name: ''
-      }
+    const expectedProcess = {
+      ...processFixture,
+      court_name: ''
+    }
 
     searchWrapper = shallow(<Search />)
-    searchWrapper.instance().updateProcess({process: expectedProcess, showResults: true})
+    searchWrapper.instance().updateProcess({ process: expectedProcess, showResults: true })
 
     expect(searchWrapper.find('#search-results').hasClass('resultsWrapper')).toBeTruthy()
     expect(searchWrapper.state().showResults).toBeTruthy()
