@@ -17,8 +17,8 @@ In the project directory, you can run:
 
 Clone the repo
 ```sh
-$ git clone https://github.com/liviaab/backend-crawler.git
-$ cd backend-crawler
+$ git clone https://github.com/liviaab/frontend-crawler.git
+$ cd frontend-crawler
 ```
 
 Install the dependencies
@@ -37,6 +37,7 @@ $ yarn start
 ```
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+The backend project is [here](https://github.com/liviaab/backend-crawler)
 <!--
 ### To Do
 #### Deployment
