@@ -30,7 +30,7 @@ class Search extends Component {
 		} else {
 			this.setState({
 				showResults: true,
-				process: result.data
+				process: result
 			})
 		}
 	}
