@@ -7,6 +7,7 @@ It is configured with:
 - ESLint
 - axios for HTTP requests
 
+and uses the (Atomic Design Style Guide)[https://github.com/danilowoz/react-atomic-design]
 
 ## Getting Started
 
