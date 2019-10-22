@@ -3,24 +3,36 @@ import { LawsuitDetails, PartiesInvolved, Title } from '../../molecules'
 import { SearchForm, ListOfChanges } from '../../organisms'
 import style from './Search.module.scss'
 
+const emptyProcess = {
+	process_number: '',
+	court_name: '',
+	distribution_date: '',
+	parties_involved: [],
+	movimentations: []
+}
 
 class Search extends Component {
+
 	constructor(props) {
 		super(props)
 		this.state = {
 			showResults: false,
-			process: {
-				process_number: '',
-				court_name: '',
-				distribution_date: '',
-				parties_involved: [],
-				movimentations: []
-			}
+			process: emptyProcess
 		}
 	}
 
-	updateProcess = (data) => {
-		this.setState({...data})
+	onSearchResult = (result) => {
+		if(result === undefined){
+			this.setState({
+				showResults: false,
+				process: emptyProcess
+			})
+		} else {
+			this.setState({
+				showResults: true,
+				process: result.data
+			})
+		}
 	}
 
 	getResultsStyle = () => (this.state.showResults ? style.resultsWrapper : style.hideResults)
@@ -42,10 +54,9 @@ class Search extends Component {
 					<div className={style.content}>
 					<Title
 						title='Busca'
-						subtitle='Selecione um Tribunal para listar os processos\
-											ou buscar pelo número unificado'
+						subtitle='Selecione um Tribunal para listar os processos ou buscar pelo número unificado'
 					/>
-					<SearchForm updateParent={this.updateProcess} />
+					<SearchForm onSearchResult={this.onSearchResult} />
 					</div>
 				</div>
 
