@@ -3,8 +3,16 @@ import { Table } from 'evergreen-ui'
 import PropTypes from 'prop-types'
 import style from './ListOfChanges.module.scss'
 
-const buildBody = (changes) => {
-  if(changes === []) {
+const Header = () => (
+  <Table.Head>
+    <Table.TextHeaderCell>
+      Movimentações
+    </Table.TextHeaderCell>
+  </Table.Head>
+)
+
+const Body = ({ changes }) => {
+  if(changes.length === 0) {
     return <Fragment />
   }
 
@@ -21,28 +29,15 @@ const buildBody = (changes) => {
   )
 }
 
-const buildHeader = () => (
-  <Table.Head>
-    <Table.TextHeaderCell>
-      Movimentações
-    </Table.TextHeaderCell>
-  </Table.Head>
+const ListOfChanges = ({ changes }) => (
+  <Table className={style.changesTable}>
+    <Header />
+    <Body changes={changes} />
+  </Table>
 )
-
-const buildTable = (changes) => {
-  return(
-    <Table className={style.changesTable}>
-      {buildHeader()}
-      {buildBody(changes)}
-    </Table>
-  )
-}
-
-const ListOfChanges = ({ changes }) => buildTable(changes)
 
 ListOfChanges.propTypes = {
   changes: PropTypes.array.isRequired
 }
-
 
 export default ListOfChanges

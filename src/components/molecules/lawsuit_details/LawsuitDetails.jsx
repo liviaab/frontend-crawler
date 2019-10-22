@@ -1,9 +1,6 @@
 import React from 'react'
 import style from './LawsuitDetails.module.scss'
 
-const DATA_INDEX = 0
-const VALUE_INDEX = 1
-
 const dict = {
   area: "Área",
   judge: "Juíz",
@@ -13,17 +10,13 @@ const dict = {
 }
 
 
-const htmlDetail = (key, value) =>  (
-    <p key={key}>{dict[key]}  &bull;  {value}</p>
-)
-
 const buildDetails = ({ process }) => {
   const entries = Object.entries(process)
 
-  if(entries !== []) {
+  if(entries.length !== 0) {
     return entries
-            .filter(item => dict.hasOwnProperty(item[DATA_INDEX]))
-            .map(item => htmlDetail(item[DATA_INDEX], item[VALUE_INDEX]))
+            .filter(([key]) => dict.hasOwnProperty(key))
+            .map(([key, value]) => <p key={key}>{dict[key]}  &bull;  {value}</p>)
   }
 }
 

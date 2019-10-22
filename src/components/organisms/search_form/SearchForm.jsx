@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Combobox, TextInput, Button, toaster} from 'evergreen-ui'
+import { Combobox, TextInput, Button, toaster } from 'evergreen-ui'
 import style from './SearchForm.module.scss'
 import { courtsService, processesService } from '../../../services'
 
@@ -23,12 +23,14 @@ class SearchForm extends Component {
 		}
 	}
 
-	componentDidMount() {
-		courtsService().get().then(response => {
+	async componentDidMount() {
+		try {
+			const response = await courtsService().get()
 			const courts = response.data.map(item => ({'id': item.id, 'label': item.initials}))
 			this.setState({ courts })
-		}).catch(error => toaster.danger('Algo de errado aconteceu durante' +
-																			'a busca de tribunais.', 500))
+		} catch (error) {
+			toaster.danger('Algo de errado aconteceu durante a busca de tribunais.', 500)
+		}
 	}
 
 	updateField = (field, value) =>	{
@@ -58,34 +60,53 @@ class SearchForm extends Component {
 		return fields
 	}
 
-	handleButton = (event) => {
+	handleButton = async (event) => {
 		const { processNumber, courtName } = this.state
+		let showResults = true
+		let response
 
-		if(this.canDoSearch()) {
-			processesService().get(processNumber.value).then(response => {
-				let showResults = true
-
-				if (response.status === 404) {
-					toaster.info('Processo não encontrado', 500)
-					showResults = false
-				}
-
-				this.props.updateParent({
-					process: { ...response.data, court_name: courtName.value },
-					showResults: showResults
-				})
-			}).catch(error => {
-				toaster.danger('Algo de errado aconteceu durante a busca \
-												e não foi possível recuperar o processo.', 500)
-			})
-		}
-		else {
+		if(!this.canDoSearch()) {
 			const fields = this.errorMessageFields()
 			const errorMessage = unformattedErrorMessage.replace('{}', fields)
 
- 			toaster.warning(errorMessage, 400)
+			toaster.warning(errorMessage, 400)
+			return
+		}
+
+		try {
+			response = await processesService().get(processNumber.value)
+		} catch (error) {
+			showResults = false
+			if (error.response.status === 404) {
+				toaster.danger('Processo não encontrado', 500)
+			} else {
+				toaster.danger(
+					'Algo de errado aconteceu durante a busca e não foi possível recuperar o processo.'
+				, 500)
+			}
+		} finally {
+			if(response === undefined){
+				response = {
+					data: {
+							process_number: '',
+							court_name: '',
+							distribution_date: '',
+							parties_involved: [],
+							movimentations: []
+					}
+				}
+			}
+
+			this.props.updateParent({
+				process: { ...response.data, court_name: '' },
+				showResults: showResults
+			})
 		}
 	}
+
+	handleComboboxChange = event => this.updateField('courtName', event.label)
+
+	handleInputChange = event => this.updateField('processNumber', event.target.value)
 
 	render(){
 		const { courts, process_number } = this.state
@@ -99,7 +120,7 @@ class SearchForm extends Component {
 					className={style.courtField}
 					width="100%"
 					height={40}
-					onChange={e => this.updateField('courtName', e.label)}
+					onChange={this.handleComboboxChange}
 				/>
 				<TextInput
 					id='input-process-number'
@@ -107,7 +128,7 @@ class SearchForm extends Component {
 					placeholder='Número do processo'
 					className={style.processField}
 					height={40}
-					onChange={e => this.updateField('processNumber', e.target.value)}
+					onChange={this.handleInputChange}
 					value={process_number}
 				/>
 				<Button

@@ -42,8 +42,7 @@ class Search extends Component {
 					<div className={style.content}>
 					<Title
 						title='Busca'
-						subtitle='Selecione um Tribunal para listar os processos\
-											ou buscar pelo número unificado'
+						subtitle='Selecione um Tribunal para listar os processos ou buscar pelo número unificado'
 					/>
 					<SearchForm updateParent={this.updateProcess} />
 					</div>
