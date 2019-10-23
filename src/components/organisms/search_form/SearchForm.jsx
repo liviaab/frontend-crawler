@@ -75,6 +75,7 @@ class SearchForm extends Component {
 				...response.data,
 				court_name: courtName.value
 			}
+			toaster.success('Processo encontrado!', 500)
 		} catch (error) {
 			if (error.response.status === 404) {
 				toaster.danger('Processo não encontrado', 500)
