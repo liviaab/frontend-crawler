@@ -33,13 +33,6 @@ class SearchForm extends Component {
 		}
 	}
 
-	updateField = (field, value) =>	{
-		value = value.trim()
-		const valid = value !== ''
-
-		this.setState({ [field]: { value, valid }})
-	}
-
 	canDoSearch = () => {
 		const { courtName, processNumber } = this.state
 		return courtName.valid && processNumber.valid
@@ -78,6 +71,10 @@ class SearchForm extends Component {
 
 		try {
 			response = await processesService().get(processNumber.value)
+			response = {
+				...response.data,
+				court_name: courtName.value
+			}
 		} catch (error) {
 			if (error.response.status === 404) {
 				toaster.danger('Processo não encontrado', 500)
@@ -89,6 +86,13 @@ class SearchForm extends Component {
 		} finally {
 			this.props.onSearchResult(response)
 		}
+	}
+
+	updateField = (field, value) =>	{
+		value = value.trim()
+		const valid = value !== ''
+
+		this.setState({ [field]: { value, valid }})
 	}
 
 	handleComboboxChange = event => this.updateField('courtName', event.label)
