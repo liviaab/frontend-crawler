@@ -21,7 +21,7 @@ describe('Search page', () => {
     }
 
     searchWrapper = shallow(<Search />)
-    searchWrapper.instance().updateProcess({ process: expectedProcess, showResults: true })
+    searchWrapper.instance().onSearchResult(expectedProcess)
 
     expect(searchWrapper.find('#search-results').hasClass('resultsWrapper')).toBeTruthy()
     expect(searchWrapper.state().showResults).toBeTruthy()

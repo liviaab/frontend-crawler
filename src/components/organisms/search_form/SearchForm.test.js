@@ -20,7 +20,7 @@ describe('SearchForm', () => {
       .get('/courts')
       .reply(500, 'Internal Server Error', { 'Content-Type': 'application/json' })
 
-    const searchFormWrapper = shallow(<SearchForm updateParent={mockFunction} />)
+    const searchFormWrapper = shallow(<SearchForm onSearchResult={mockFunction} />)
     setTimeout(() => {
       done()
       expect(searchFormWrapper.state().courts).toHaveLength(0)
@@ -41,7 +41,7 @@ describe('SearchForm organism', () => {
   })
 
   it('loads all courts after mount', (done) => {
-    searchFormWrapper = shallow(<SearchForm updateParent={mockFunction} />)
+    searchFormWrapper = shallow(<SearchForm onSearchResult={mockFunction} />)
     setTimeout(() => {
       done()
       expect(searchFormWrapper.state().courts).toHaveLength(courtsResponse.length)
@@ -64,7 +64,7 @@ describe('SearchForm organism', () => {
       .get(`/processes/${processNumber}`)
       .reply(200, processResponse, { 'Content-Type': 'application/json' })
 
-    searchFormWrapper = shallow(<SearchForm updateParent={mockFunction} />)
+    searchFormWrapper = shallow(<SearchForm onSearchResult={mockFunction} />)
     searchFormWrapper.setState({ ...validState })
     searchFormWrapper.find('#submit').simulate('click')
 
@@ -80,7 +80,7 @@ describe('SearchForm organism', () => {
       .get('/processes/invalido')
       .reply(404, 'Not Found', { 'Content-Type': 'application/json' })
 
-    searchFormWrapper = shallow(<SearchForm updateParent={mockFunction} />)
+    searchFormWrapper = shallow(<SearchForm onSearchResult={mockFunction} />)
     const invalidProcessState = {
       ...searchFormWrapper.state(),
       courtName: {
@@ -104,7 +104,7 @@ describe('SearchForm organism', () => {
   it('updates state if court is selected', () => {
     const event = { id: 1, label: 'TJAL' }
 
-    searchFormWrapper = shallow(<SearchForm updateParent={mockFunction} />)
+    searchFormWrapper = shallow(<SearchForm onSearchResult={mockFunction} />)
     const combobox = searchFormWrapper.find('Combobox')
     combobox.simulate('change', event)
     expect(searchFormWrapper.state().courtName.value).toEqual('TJAL')
@@ -117,14 +117,14 @@ describe('SearchForm organism', () => {
       }
     }
 
-    searchFormWrapper = shallow(<SearchForm updateParent={mockFunction} />)
+    searchFormWrapper = shallow(<SearchForm onSearchResult={mockFunction} />)
     const input = searchFormWrapper.find('#input-process-number')
     input.simulate('change', event)
     expect(searchFormWrapper.state().processNumber.value).toEqual(processNumber)
   })
 
   it('does not do search if fields are empty', () => {
-    searchFormWrapper = shallow(<SearchForm updateParent={mockFunction} />)
+    searchFormWrapper = shallow(<SearchForm onSearchResult={mockFunction} />)
     expect(searchFormWrapper.instance().canDoSearch()).toBeFalsy()
   })
 })

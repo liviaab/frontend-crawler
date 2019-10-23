@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import ListOfChanges from './ListOfChanges'
 import processFixture from '../../../fixtures/process'
 
@@ -8,13 +8,16 @@ describe('ListOfChanges organism', () => {
   let listOfChanges
 
   it('renders a table without body when changes argument is empty', () => {
-    listOfChanges = shallow(<ListOfChanges changes={[]} />)
-    expect(listOfChanges.find('TableBody').children()).toHaveLength(0)
+    listOfChanges = mount(<ListOfChanges changes={[]} />)
+    expect(listOfChanges.find('Body').children()).toHaveLength(0)
+    expect(listOfChanges.find('TableBody').children().length).toEqual(0)
+    expect(listOfChanges.find('.Body').children().length).toEqual(0)
+
   })
 
   it('renders a full table with correct argument', () => {
     const changes = processFixture.movimentations
-    listOfChanges = shallow(<ListOfChanges changes={changes} />)
-    expect(listOfChanges.find('TableBody').children()).toHaveLength(5)
+    listOfChanges = mount(<ListOfChanges changes={changes} />)
+    expect(listOfChanges.find('TableBody').children().length).toBeGreaterThan(0)
   })
 })
