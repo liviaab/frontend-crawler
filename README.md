@@ -36,6 +36,18 @@ $ yarn start
 ```
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+
+### Method 2 - Running with `docker-compose`
+
+```sh
+$ docker-compose up --build
+```
+
+Open [http://localhost:4000](http://localhost:4000) to view it in the browser.
+
+
+## Testing
+
 Process number examples:
 
 - 0067154-55.2010.8.02.0001
@@ -47,16 +59,6 @@ Process number examples:
 
 The backend project is [here](https://github.com/liviaab/backend-crawler)
 
-
-### Method 2 - Running with `docker-compose`
-
-```sh
-$ docker-compose up --build
-```
-
-Open [http://localhost:4000](http://localhost:4000) to view it in the browser.
-
-The backend project is [here](https://github.com/liviaab/backend-crawler)
 
 
 <!--
