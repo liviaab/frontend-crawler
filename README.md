@@ -11,16 +11,14 @@ and uses the [Atomic Design Style Guide](https://github.com/danilowoz/react-atom
 
 ## Getting Started
 
-### Running on your local machine
-
-In the project directory, you can run:
-
-
 Clone the repo
 ```sh
 $ git clone https://github.com/liviaab/frontend-crawler.git
 $ cd frontend-crawler
 ```
+
+
+### Method 1 - Running on your local machine
 
 Install the dependencies
 ```sh
@@ -39,6 +37,19 @@ $ yarn start
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The backend project is [here](https://github.com/liviaab/backend-crawler)
+
+
+### Method 2 - Running with `docker-compose`
+
+```sh
+$ docker-compose up --build
+```
+
+Open [http://localhost:4000](http://localhost:4000) to view it in the browser.
+
+The backend project is [here](https://github.com/liviaab/backend-crawler)
+
+
 <!--
 ### To Do
 #### Deployment
